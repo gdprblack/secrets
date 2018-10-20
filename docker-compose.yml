@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: testpass
+    volumes:
+      - ./db:/data/db
+    command: mongod
+
+  node:
+    image: node
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: bot
+    container_name: node
+    working_dir: /data
+    volumes:
+      - ./node:/data
+    command: tail -f /dev/null

@@ -1,0 +1,5 @@
+FROM node
+RUN npm install \ 
+shamirs-secret-sharing \
+node-rsa \
+mongodb
