@@ -10,7 +10,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: testpass
     volumes:
       - ./db:/data/db
-    command: mongod
+    command: mongod --auth
 
   node:
     image: node
