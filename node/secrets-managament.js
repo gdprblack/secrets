@@ -6,6 +6,9 @@ const NodeRSA = require('node-rsa');
 const saltRounds = 10;
 const NUM_JUNTA = 10;
 
+
+
+
 function getData(user) {
   data1 = "{'id' : 1, 'name': 'enric','age': 24}"
   data2 = "{'id' : 2,'name': 'juanjo','age': 22}"
@@ -65,36 +68,59 @@ function decryptSecret(privateKey){
   return secret;
 }
 
-function generateKeypairs(){
-  var array = [];
-  const dpo_key = new NodeRSA({b: 512});
-  array.push(dpo_key);
-  for (i=0; i<NUM_JUNTA; i++){
-    const key = new NodeRSA({b: 512});
-    array.push(key);
-  }
-  // console.log(array);
-  return array;
+function generateKeypair(){
+  const keypair = new NodeRSA({b: 512});
+  return keypair;
 }
-
-keypairs = generateKeypairs();
-// user1 requests to delete his data
-s = generateSecret();
-
-console.log("SECRET: ",s);
-// insert in db
-enc_data = encryptData(getData('user1'),s);
-console.log("Decrypted: ", decryptData(s, enc_data));
-console.log("ENCRYPTED DATA: ",enc_data);
-// SEND SECRET TO USER
-ssplit = splitSecret(s);
-console.log("DPO SECRET: ", ssplit.dpo_secret);
-console.log("SHARES OF JUNTA: ", ssplit.junta_shares);
-
-// For example, we encrypt dpo secret and send it to him.
-encryptSecret(ssplit.dpo_secret, keypairs[0]);
-// Example with one person from the 'junta'
-encryptSecret(ssplit.junta_shares[0], keypairs[1]);
+//
+// keypairs = generateKeypairs();
+// // user1 requests to delete his data
+// s = generateSecret();
+//
+// console.log("SECRET: ",s);
+// // insert in db
+// enc_data = encryptData(getData('user1'),s);
+// console.log("Decrypted: ", decryptData(s, enc_data));
+// console.log("ENCRYPTED DATA: ",enc_data);
+// // SEND SECRET TO USER
+// ssplit = splitSecret(s);
+// console.log("DPO SECRET: ", ssplit.dpo_secret);
+// console.log("SHARES OF JUNTA: ", ssplit.junta_shares);
+//
+// // For example, we encrypt dpo secret and send it to him.
+// encryptSecret(ssplit.dpo_secret, keypairs[0]);
+// // Example with one person from the 'junta'
+// encryptSecret(ssplit.junta_shares[0], keypairs[1]);
 
 
 // joinSecret();
+
+/*
+
+Main function
+@args
+  - data
+  - public key DPO,
+  - array publick keys
+@functions
+  -
+*/
+function secrets(data, pkey, pkeys) {
+  s = generateSecret();
+  enc_data = encryptData(data,s);
+
+  response = {};
+  response['secret'] = s;
+  response['data_encrypted'] = enc_data;
+
+  ssplit = splitSecret(s);
+  console.log("DPO SECRET: ", ssplit.dpo_secret);
+  console.log("SHARES OF JUNTA: ", ssplit.junta_shares);
+  enc_secret_dpo = encryptSecret(ssplit.dpo_secret, pkey);
+  enc_secret_board = encryptSecret(ssplit.junta_shares, pkeys);
+
+  response['dpo_secret'] = enc_secret_dpo;
+  response['board_secret'] = enc_secret_board;
+
+
+}
