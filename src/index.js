@@ -18,4 +18,4 @@ function encryptData(data, dpoPublicKey, boardPublicKeys) {
   }
 }
 
-export { generateKeypair, encryptData };
+module.exports = { generateKeypair, encryptData };
