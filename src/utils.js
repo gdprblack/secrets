@@ -31,7 +31,7 @@ Main function
 @functions
   -
 */
-function secrets(data, dpokey, boardKeys) {
+function get_secret(data, dpokey, boardKeys) {
   s = generateSecret();
   enc_data = crypt.encryptData(data,s);
 
@@ -40,24 +40,18 @@ function secrets(data, dpokey, boardKeys) {
   response['data_encrypted'] = enc_data;
 
   ssplit = splitSecret(s);
-  console.log("DPO SECRET: ", ssplit.dpo_secret);
-  console.log("SHARES OF BOARD: ", ssplit.junta_shares);
+
   enc_secret_dpo = crypt.encryptSecret(ssplit.dpo_secret, new NodeRSA(dpokey));
   enc_secret_board = [];
-  i=0;
-  for (key in boardKeys){
-    enc = crypt.encryptSecret(ssplit.junta_shares[i], new NodeRSA(key));
+  for (i = 0; i < boardKeys.length; i++) { 
+    enc = crypt.encryptSecret(ssplit.junta_shares[i], new NodeRSA(boardKeys[i]));
     enc_secret_board.push(enc);
-    i++;
   }
-  
 
   response['dpo_secret'] = enc_secret_dpo;
   response['board_secret'] = enc_secret_board;
-  console.log(response);
 
 }
 
 secrets('hola',crypt.getKeyPair()[1], [crypt.getKeyPair()[1],crypt.getKeyPair()[1]]);
 
-// export { generateSecret, splitSecret };
