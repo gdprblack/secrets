@@ -17,12 +17,11 @@ function getSecret(data, dpokey, boardKeys) {
 
   ssplit = sss.splitSecret(s, boardKeys);
   encryptedKeys = {};
-  enc_secret_dpo = crypt.encryptSecret(ssplit.dpo_secret, new NodeRSA(dpokey.publicKey));
+  enc_secret_dpo = crypt.encryptSecret(ssplit.dpo_secret, dpokey.publicKey);
   encryptedKeys['dpoKey'] = enc_secret_dpo;
   enc_secret_board = {};
-
   for (i = 0; i < boardKeys.length; i++) { 
-    enc = crypt.encryptSecret(ssplit.junta_shares[i], new NodeRSA(boardKeys[i].publicKey));
+    enc = crypt.encryptSecret(ssplit.junta_shares[i],boardKeys[i].publicKey);
     enc_secret_board[boardKeys[i].publicKey] = enc;
   }
   encryptedKeys['boardKeys'] = enc_secret_board;

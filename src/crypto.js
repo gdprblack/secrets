@@ -26,13 +26,19 @@ function decryptData(data_encrypted, secret) {
 */
 function encryptSecret(secret, publickey){
   const key = new NodeRSA(publickey);
-  const encrypted = key.encrypt(secret);
+  const encrypted = key.encrypt(secret, 'base64');
   return encrypted;
 }
 
 function decryptKey(encrypted_secret,privatekey){
   const key = new NodeRSA(privatekey);
   secret = key.decrypt(encrypted_secret,'utf8');
+  return secret;
+}
+function decryptKeyBoard(encrypted_secret,privatekey){
+  const key = new NodeRSA(privatekey);
+  console.log("encrypted secret", encrypted_secret);
+  secret = key.decrypt(encrypted_secret);
   return secret;
 }
 
@@ -44,4 +50,4 @@ function getKeyPair(){
 // enc_secret = encryptSecret("hola dades",keypair[1]);
 // console.log(decryptSecret(enc_secret,keypair[0]));
 
-module.exports = { getKeyPair, encryptData, decryptKey, encryptSecret }
+module.exports = { getKeyPair, encryptData, decryptKey, encryptSecret, decryptData, decryptKeyBoard }
