@@ -38,7 +38,7 @@ function decryptSecret(encrypted_secret,privatekey){
 
 function getKeyPair(){
   const keypair = new NodeRSA({b: 512});
-  return [keypair.exportKey('pkcs1'),keypair.exportKey('public')];
+  return {private: keypair.exportKey('pkcs1'), public: keypair.exportKey('public')};
 }
 // keypair = getKeyPair();
 // enc_secret = encryptSecret("hola dades",keypair[1]);
