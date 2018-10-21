@@ -1,6 +1,5 @@
 function generateKeypair() {
-  //TODO: Generate Keypair
-  return { public: 123, private: 456 };
+  return getKeyPair();
 }
 
 function encryptData(data, dpoPublicKey, boardPublicKeys) {
