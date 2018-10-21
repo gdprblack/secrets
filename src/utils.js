@@ -30,12 +30,12 @@ function getSecret(data, dpokey, boardKeys) {
   return response;
 }
 
-function joinSecret(dpo_privatekey, board_privatekeys, dpo_encryptedsecret, board_encryptedsecrets){
-  dpo_secret = decryptSecret(dpo_encryptedsecret, dpo_privatekey);
-  board_buffers = []
-  for (i=0; i<board_privatekeys.length; i++){
-    board_buffers.push(decryptSecret(board_encryptedsecrets[i], board_privatekeys[i]))
-  }
+function joinSecret(dpo_secret, board_buffers){
+  // dpo_secret = decryptSecret(dpo_encryptedsecret, dpo_privatekey);
+  // board_buffers = []
+  // for (i=0; i<board_privatekeys.length; i++){
+  //   board_buffers.push(decryptSecret(board_encryptedsecrets[i], board_privatekeys[i]))
+  // }
   board_secret = sss.joinSecret(board_buffers);
   return dpo_secret+board_secret;
 }
