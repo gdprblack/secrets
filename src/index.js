@@ -7,7 +7,7 @@ function generateKeypair() {
 }
 
 function encryptData(data, dpoPublicKey, boardPublicKeys) {
-  return utils.getSecret();
+  return utils.getSecret(data, dpoPublicKey, boardPublicKeys);
 }
 
 function decryptSecrets(dpo_privatekey, board_privatekeys, dpo_encryptedsecret, board_encryptedsecrets){
