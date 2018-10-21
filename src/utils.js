@@ -53,5 +53,4 @@ function get_secret(data, dpokey, boardKeys) {
 
 }
 
-secrets('hola',crypt.getKeyPair()[1], [crypt.getKeyPair()[1],crypt.getKeyPair()[1]]);
 

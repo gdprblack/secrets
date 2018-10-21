@@ -6,7 +6,7 @@ function encryptData(data, dpoPublicKey, boardPublicKeys) {
   //TODO: Generate Keys
   return { 
     encryptedData: "abc",
-    secret: "def",
+    get_secret: "def",
     encryptedKeys: {
       dpoKey: "fhd",
       boardKeys: {
@@ -16,5 +16,8 @@ function encryptData(data, dpoPublicKey, boardPublicKeys) {
     }
   }
 }
+
+
+
 
 module.exports = { generateKeypair, encryptData };
