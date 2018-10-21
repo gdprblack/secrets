@@ -15,7 +15,7 @@ function getSecret(data, dpokey, boardKeys) {
   response['secret'] = s;
   response['encryptedData'] = enc_data;
 
-  ssplit = sss.splitSecret(s);
+  ssplit = sss.splitSecret(s, boardKeys);
   encryptedKeys = {};
   enc_secret_dpo = crypt.encryptSecret(ssplit.dpo_secret, new NodeRSA(dpokey.publicKey));
   encryptedKeys['dpoKey'] = enc_secret_dpo;

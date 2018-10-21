@@ -30,7 +30,7 @@ function encryptSecret(secret, publickey){
   return encrypted;
 }
 
-function decryptSecret(encrypted_secret,privatekey){
+function decryptKey(encrypted_secret,privatekey){
   const key = new NodeRSA(privatekey);
   secret = key.decrypt(encrypted_secret,'utf8');
   return secret;
@@ -44,4 +44,4 @@ function getKeyPair(){
 // enc_secret = encryptSecret("hola dades",keypair[1]);
 // console.log(decryptSecret(enc_secret,keypair[0]));
 
-module.exports = { getKeyPair, encryptData, encryptSecret }
+module.exports = { getKeyPair, encryptData, decryptKey, encryptSecret }
