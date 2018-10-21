@@ -33,4 +33,4 @@ function decryptData(data_encrypted, secret){
 // response = encryptData("dades del usuari", dpo_keys[1], public_board_keys);
 // console.log(response);
 
-module.exports = { generateKeypair, encryptData, decryptSecrets, decryptDades};
+module.exports = { generateKeypair, encryptData, decryptSecrets, decryptData};
