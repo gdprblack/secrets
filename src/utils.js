@@ -13,12 +13,12 @@ function getSecret(data, dpokey, boardKeys) {
 
   response = {};
   response['secret'] = s;
-  response['data_encrypted'] = enc_data;
+  response['encryptedData'] = enc_data;
 
   ssplit = sss.splitSecret(s);
   encryptedKeys = {};
   enc_secret_dpo = crypt.encryptSecret(ssplit.dpo_secret, new NodeRSA(dpokey.publicKey));
-  encryptedKeys['dpokey'] = enc_secret_dpo;
+  encryptedKeys['dpoKey'] = enc_secret_dpo;
   enc_secret_board = {};
 
   for (i = 0; i < boardKeys.length; i++) { 
